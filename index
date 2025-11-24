@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+set -x
+
+refdir=/hb/groups/kay_lab/popoolation2/reference
+refgenome=/hb/groups/kay_lab/popoolation2/reference/refgenome
+
+mkdir -p $refdir
+
+# Copy reference into place if not already there
+if [ ! -f $refgenome ]; then
+    cp /hb/groups/kay_lab/popoolation2/refgenome $refgenome
+fi
+
+# Index reference once
+if [ ! -f ${refgenome}.bwt ]; then
+    bwa index $refgenome
+fi
+
+echo "Reference prepared and indexed."
